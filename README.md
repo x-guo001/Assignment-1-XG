@@ -22,6 +22,9 @@ The purpose of this assignment is to get you comfortable with:
     2. FASTq parser works correctly (2)
     3. Transcription function works correctly (2)
     4. Reverse Transcription function works correctly (2)
+    
+    By the due date, if your FASTa parser or FASTq parser does not work, include comments on what you think the solution is and what you struggled 
+    with implementing for high partial marks.
 
 ## Tests (5 points)
     5. Write Positive Case unit tests (1.5)
@@ -29,8 +32,10 @@ The purpose of this assignment is to get you comfortable with:
     7. Submit a job to GitHub Actions (1)
     8. Create a local package using flit (1)
 
+    If your FASTa and FASTq parsers do not work, write solid test cases for both Transcription functions for high partial marks.
+
 ## Documentation & GitHub (2 points)
-    9. Write comments documenting your code (1)
+    9. Write comments documenting your code even if all your code works (1)
     10. Push your finished assignment to GitHub (1)
 
 
