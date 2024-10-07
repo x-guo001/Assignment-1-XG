@@ -6,7 +6,7 @@ from seqparser import (
 
 def main():
     """
-    The main function
+    TODO: The main function
     """
     # Create instance of FastaParser
     aparser = FastaParser('data/test.fa')
