@@ -32,39 +32,33 @@ class Parser:
 
     def __iter__(self):
         """
-        This is an overriding of the Base Class Iterable function. All classes in python
-        have this function, but it is not implemented for all classes in python. 
+        This is an overriding of the Base Class Iterable function. Here, for the purposes of this
+        assignment, we are defining how this class and all inherited classes interact with loops.
 
-        # Note on the `__iter__` method
-            Generally one doesn't call this method directly as `obj.__iter__()`. Instead it
-            lets you use the object itself as an iterable. This is really useful in OOP because it
-            allows you to represent and use iterable objects very cleanly. You still can call this
-            method directly, but it really takes the fun out of python...
+        # Usage
 
-            ## How to use the `__iter__` method
-            
-            ```
-            parser_obj = Parser(filename)
-            for record in parser_obj:
-              # do something
-            ```
-            
-        # Why you should care about generators
+        ```
+        parser_obj = Parser(filename)
+        for record in parser_obj:
+            # do something
+        ```
 
-            The expected behavior of this function is to create a generator which will lazily load
-            the next item in its queue. These are very useful for many bioinformatic tools where you
-            don't need everything loaded at once and instead are interested in interacting with the 
-            stream (i.e. you need every value once and won't need it again after you use it). This saves
-            quite a bit of memory, especially when you are working with billions of sequences and don't 
-            need to keep all of them in memory. 
+        The code above calls `__iter__` and for every record it returns, does something with it.
+
+        You may notice we use the keyword `yield` instead of `return` for this function. This is
+        because our `__iter__` is what is known as a generator function, which generates an
+        output then waits until it is called again to resume. In our case, it just reads in a
+        record, outputs it, then waits to read the next record.
+
+        In comparison, functions with `return` simply restart when they are called again, so we
+        would just be reading from the beginning of the file.
+
+        Generator functions are very useful for many bioinformatic tools where you don't need 
+        everything loaded at once and instead are interested in interacting with the stream 
+        (i.e. you need every value once and won't need it again after you use it). This saves
+        quite a bit of memory, especially when you are working with billions of sequences and don't 
+        need to keep all of them in memory. 
         
-        # Distinction between generator functions and other functions
-        
-            instead of returning a value with the keyword `return`
-            a generator must return a value with the keyword `yield`.
-
-            This `yield` keyword will not shortcut the loop it is nested in like a return will
-            and instead will pause the loop until the object is taken from it. 
         """
 
         # The proper way to open a file for reading and writing in python3 is to use the `with` / `as` keywords.
@@ -72,17 +66,17 @@ class Parser:
         # sometimes close a file before everything you expect to be written/read is written/read. 
         # 
         # the interpretation of the following code is that for the lifetime of the filebuffer 
-        # returned by the `open` function it will be accessible as the variable `f_obj`
+        # returned by the `open` function it will be accessible as the variable `f_obj`, of type io.TextIOWrapper
         with open(self.filename, "r") as f_obj:
             
-            # this loop will break at some point! 
-            # but I will leave it up to you to implement the fix! 
+            # this loop will run forever or return an error, depending on your implementations of _get_record
+            # but we will leave it up to you to implement the fix! 
 
-            # You will need to look at the `Try` / `Except` keywords in python
-            # and implement an exception for the error you will find in the error message you receive. 
+            # hint: when reading a file, how do we know when to stop reading? what keyword should we use to stop a loop?
 
             while True:
                 rec = self.get_record(f_obj)
+                # TODO: stop the loop
                 yield rec
 
     def _get_record(self, f_obj: io.TextIOWrapper) -> Union[Tuple[str, str], Tuple[str, str, str]]:
@@ -99,12 +93,10 @@ class Parser:
 class FastaParser(Parser):
     """
     Fasta Specific Parsing.
-    
-    # This class is inheriting from another class. What behavior do we 
     """
     def _get_record(self, f_obj: io.TextIOWrapper) -> Tuple[str, str]:
         """
-        returns the next fasta record
+        TODO: returns the next fasta record as a 2-tuple of (header, sequence)
         """
 
 
@@ -114,6 +106,6 @@ class FastqParser(Parser):
     """
     def _get_record(self, f_obj: io.TextIOWrapper) -> Tuple[str, str, str]:
         """
-        returns the next fastq record
+        TODO: returns the next fastq record as a 3-tuple of (header, sequence, quality)
         """
 
