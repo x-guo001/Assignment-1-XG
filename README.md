@@ -35,7 +35,7 @@ The purpose of this assignment is to get you comfortable with:
     If your FASTa and FASTq parsers do not work, write solid test cases for both Transcription functions for high partial marks.
 
 ## Documentation & GitHub (2 points)
-    9. Write comments documenting your code even if all your code works (1)
+    9. Write comments documenting your code (even if all your code works!) (1)
     10. Push your finished assignment to GitHub (1)
 
 
