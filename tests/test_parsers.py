@@ -23,7 +23,7 @@ def test_freebie_parser_2():
         
 def test_FastaParser():
     """
-    Write your unit test for your FastaParser
+    TODO: Write your unit test for your FastaParser
     class here. You should generate an instance of
     your FastaParser class and assert that it properly
     reads in the example Fasta File.
@@ -33,7 +33,7 @@ def test_FastaParser():
 
 def test_FastqParser():
     """
-    Write your unit test for your FastqParser
+    TODO: Write your unit test for your FastqParser
     class here. You should generate an instance of
     your FastqParser class and assert that it properly
     reads in the example Fastq File.
