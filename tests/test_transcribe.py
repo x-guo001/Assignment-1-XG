@@ -26,6 +26,11 @@ def test_transcribe():
     TODO: Write your unit test for the
     transcribe function here.
     """
+    # pytest the positive transcribe test
+    assert transcribe("ATCGGAT") == "UAGCCUA"
+    # pytest the negative transcribe test
+    assert transcribe("ATCGGAT") != "AAATT"
+
     pass
 
 
@@ -34,4 +39,9 @@ def test_reverse_transcribe():
     TODO: Write your unit test for the
     reverse transcribe function here.
     """
+    # pytest the positive reverse transcribe
+    assert reverse_transcribe("ATCGGAT") == "AUCCGAU"
+    # pytest the negative reverse transcribe
+    assert reverse_transcribe("ATCGGAT") != "AAATT"
+
     pass

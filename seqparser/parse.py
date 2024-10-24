@@ -77,6 +77,9 @@ class Parser:
             while True:
                 rec = self.get_record(f_obj)
                 # TODO: stop the loop
+                # stop the loop by adding 'break'
+                if rec is None:
+                    break
                 yield rec
 
     def _get_record(self, f_obj: io.TextIOWrapper) -> Union[Tuple[str, str], Tuple[str, str, str]]:
@@ -98,6 +101,24 @@ class FastaParser(Parser):
         """
         TODO: returns the next fasta record as a 2-tuple of (header, sequence)
         """
+        
+        header = ""
+        sequence = ""
+
+        for line in f_obj:
+            # remove white space from the line
+            line = line.strip()
+            # if the line start with >, it is a header line
+            if line.startswith(">"):
+                header = line    
+            # if not a header, the line is sequence    
+            else:
+                sequence=line
+            # if both header and sequence were found, return as (header, sequence)
+            if header and sequence:
+                return (header, sequence)
+                 
+
 
 
 class FastqParser(Parser):
@@ -108,4 +129,17 @@ class FastqParser(Parser):
         """
         TODO: returns the next fastq record as a 3-tuple of (header, sequence, quality)
         """
+        #remove the white space from header
+        header = f_obj.readline().strip()
+        if not header:
+            return None
+        #sequence file is followed by the header and remove any white space
+        sequence = f_obj.readline().strip()
+        #skip the third line followed by sequence line
+        f_obj.readline()
+        #quality file will be shown after the sequence line and the white space will be removed
+        quality = f_obj.readline().strip()
+        #fastq data will be displayed in the format of (header, sequence, quality)
+        return (header, sequence, quality)
+
 
